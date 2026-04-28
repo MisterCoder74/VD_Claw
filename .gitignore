@@ -1,0 +1,5 @@
+# PHP local server
+.php_history
+# OS files
+.DS_Store
+Thumbs.db

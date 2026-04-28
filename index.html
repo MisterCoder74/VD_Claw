@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VD Claw Prototype</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>VD Claw</h1>
+            <p>Scrape and Parse with OpenAI</p>
+        </header>
+
+        <main>
+            <section class="config-section">
+                <div class="input-group">
+                    <label for="apiKey">OpenAI API Key</label>
+                    <div class="password-toggle">
+                        <input type="password" id="apiKey" placeholder="sk-...">
+                        <button id="saveKeyBtn">Save Key</button>
+                    </div>
+                    <small>Key is saved in <code>sessionStorage</code> (cleared when browser closes).</small>
+                </div>
+            </section>
+
+            <section class="claw-section">
+                <div class="input-group">
+                    <label for="targetUrl">Target URL</label>
+                    <input type="url" id="targetUrl" placeholder="https://example.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="prompt">Parsing Prompt</label>
+                    <textarea id="prompt" rows="4" placeholder="Extract all product names and their prices in a list."></textarea>
+                </div>
+
+                <button id="clawBtn">Run Claw</button>
+            </section>
+
+            <section class="result-section hidden" id="resultSection">
+                <h2>Result</h2>
+                <div class="usage-info" id="usageInfo"></div>
+                <pre id="output"></pre>
+                <button id="copyBtn">Copy JSON</button>
+            </section>
+
+            <div id="loader" class="loader hidden">
+                <div class="spinner"></div>
+                <p>Clawing data... please wait.</p>
+            </div>
+
+            <div id="errorMessage" class="error-message hidden"></div>
+        </main>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
