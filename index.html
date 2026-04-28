@@ -3,116 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VD Claw Prototype</title>
+    <title>VD Claw | NextGen AI Scraper</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lexend:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Markdown Parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+    <div class="bg-glow"></div>
     <div class="container">
         <header>
-            <h1>VD Claw</h1>
-            <p>Scrape and Parse with OpenAI</p>
+            <div class="logo">
+                <i class="fas fa-bolt neon-icon"></i>
+                <h1>VD <span>CLAW</span></h1>
+            </div>
+            <p class="subtitle">Next-Generation AI-Powered Web Intelligence</p>
         </header>
 
         <main>
-            <section class="config-section">
+            <section class="config-section glass-panel">
                 <div class="input-group">
-                    <label for="apiKey">OpenAI API Key</label>
+                    <label for="apiKey"><i class="fas fa-key"></i> OpenAI API Key</label>
                     <div class="password-toggle">
                         <input type="password" id="apiKey" placeholder="sk-...">
-                        <button id="saveKeyBtn">Save Key</button>
+                        <button id="saveKeyBtn" class="btn-secondary">Save Key</button>
                     </div>
-                    <small>Key is saved in <code>sessionStorage</code> (cleared when browser closes).</small>
+                    <small>Stored in <code>sessionStorage</code> (cleared on close).</small>
                 </div>
             </section>
 
-            <div class="tabs">
-                <button class="tab-btn active" data-tab="standard">Standard Claw</button>
-                <button class="tab-btn" data-tab="comparison">CRO Comparison</button>
-                <button class="tab-btn" data-tab="enhanced">Enhanced Extractor</button>
-            </div>
+            <nav class="tabs glass-panel">
+                <button class="tab-btn active" data-tab="standard">
+                    <i class="fas fa-search"></i> Standard
+                </button>
+                <button class="tab-btn" data-tab="comparison">
+                    <i class="fas fa-columns"></i> Comparison
+                </button>
+                <button class="tab-btn" data-tab="enhanced">
+                    <i class="fas fa-wand-magic-sparkles"></i> Enhanced
+                </button>
+                <button class="tab-btn" data-tab="local">
+                    <i class="fas fa-file-import"></i> Local Analysis
+                </button>
+            </nav>
 
-            <div id="standard" class="tab-content">
+            <div id="standard" class="tab-content glass-panel">
                 <section class="claw-section">
                     <div class="input-group">
-                        <label for="targetUrl">Target URL</label>
+                        <label for="targetUrl"><i class="fas fa-link"></i> Target URL</label>
                         <input type="url" id="targetUrl" placeholder="https://example.com">
                     </div>
 
                     <div class="input-group">
-                        <label for="prompt">Parsing Prompt</label>
+                        <label for="prompt"><i class="fas fa-terminal"></i> Parsing Prompt</label>
                         <textarea id="prompt" rows="4" placeholder="Extract all product names and their prices in a list."></textarea>
                     </div>
 
-                    <button class="run-btn" id="clawBtn">Run Claw</button>
+                    <button class="run-btn" id="clawBtn">
+                        <i class="fas fa-play"></i> Run Standard Claw
+                    </button>
                 </section>
             </div>
 
-            <div id="comparison" class="tab-content hidden">
+            <div id="comparison" class="tab-content hidden glass-panel">
                 <section class="claw-section">
                     <div class="input-group">
-                        <label>Target URLs (2-3 links)</label>
-                        <input type="url" class="compare-url" placeholder="https://example.com/page1" style="margin-bottom: 0.5rem;">
-                        <input type="url" class="compare-url" placeholder="https://example.com/page2" style="margin-bottom: 0.5rem;">
-                        <input type="url" class="compare-url" placeholder="https://example.com/page3 (Optional)">
+                        <label><i class="fas fa-links"></i> Comparison URLs (Up to 4)</label>
+                        <div class="url-grid">
+                            <input type="url" class="compare-url" placeholder="URL 1 (Required)">
+                            <input type="url" class="compare-url" placeholder="URL 2 (Required)">
+                            <input type="url" class="compare-url" placeholder="URL 3 (Optional)">
+                            <input type="url" class="compare-url" placeholder="URL 4 (Optional)">
+                        </div>
                     </div>
-                    <button class="run-btn" id="compareBtn">Compare Links</button>
+                    <button class="run-btn" id="compareBtn">
+                        <i class="fas fa-layer-group"></i> Compare Links
+                    </button>
                 </section>
             </div>
 
-            <div id="enhanced" class="tab-content hidden">
+            <div id="enhanced" class="tab-content hidden glass-panel">
                 <section class="claw-section">
                     <div class="input-group">
-                        <label for="enhancedUrl">Target URL</label>
+                        <label for="enhancedUrl"><i class="fas fa-link"></i> Target URL</label>
                         <input type="url" id="enhancedUrl" placeholder="https://example.com">
                     </div>
                     <div class="input-group">
-                        <label for="enhancedPrompt">Specific Instructions (Optional)</label>
+                        <label for="enhancedPrompt"><i class="fas fa-comment-dots"></i> Specific Instructions (Optional)</label>
                         <textarea id="enhancedPrompt" rows="3" placeholder="Focus on hero section, pricing, and CTA buttons."></textarea>
                     </div>
-                    <button class="run-btn" id="enhancedBtn">Extract Enhanced Data</button>
+                    <button class="run-btn" id="enhancedBtn">
+                        <i class="fas fa-bolt"></i> Extract Enhanced Data
+                    </button>
+                </section>
+            </div>
+
+            <div id="local" class="tab-content hidden glass-panel">
+                <section class="claw-section">
+                    <div class="input-group">
+                        <label for="localFile"><i class="fas fa-upload"></i> Upload Local File (.html, .csv, .txt, .json)</label>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="localFile" accept=".html,.csv,.txt,.json">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="localPrompt"><i class="fas fa-terminal"></i> Analysis Instructions</label>
+                        <textarea id="localPrompt" rows="4" placeholder="Analyze this file and summarize its contents."></textarea>
+                    </div>
+                    <button class="run-btn" id="localBtn">
+                        <i class="fas fa-microchip"></i> Analyze Local File
+                    </button>
                 </section>
             </div>
 
             <section class="result-section hidden" id="resultSection">
-                <div class="result-header">
-                    <h2>Result</h2>
-                    <button id="copyBtn">Copy JSON</button>
-                </div>
-                <div class="usage-info" id="usageInfo"></div>
-                
-                <div id="enhancedResults" class="hidden">
-                    <div class="result-tab-container">
-                        <div class="result-tabs">
-                            <button class="result-tab-btn active" data-result-tab="json">JSON Data</button>
-                            <button class="result-tab-btn" data-result-tab="table">Visual Table</button>
-                            <button class="result-tab-btn" data-result-tab="report">Text Report</button>
-                        </div>
-                        <div id="json-result" class="result-tab-content">
-                            <pre id="output"></pre>
-                        </div>
-                        <div id="table-result" class="result-tab-content hidden">
-                            <div id="htmlTable" class="table-responsive"></div>
-                        </div>
-                        <div id="report-result" class="result-tab-content hidden">
-                            <div id="textReport" class="report-content"></div>
+                <div class="result-header-wrapper glass-panel">
+                    <div class="result-header">
+                        <h2><i class="fas fa-square-poll-vertical"></i> Analysis Results</h2>
+                        <div class="export-group">
+                            <button class="export-btn" id="exportJson" title="Download JSON"><i class="fas fa-file-json"></i> JSON</button>
+                            <button class="export-btn" id="exportMd" title="Download Markdown"><i class="fas fa-file-markdown"></i> MD</button>
+                            <button class="export-btn" id="exportHtml" title="Download HTML Report"><i class="fas fa-file-code"></i> HTML</button>
                         </div>
                     </div>
+                    <div class="usage-info" id="usageInfo"></div>
                 </div>
+                
+                <div class="result-body glass-panel">
+                    <div class="result-tabs-nav">
+                        <button class="res-tab-btn active" data-res-tab="json">JSON Data</button>
+                        <button class="res-tab-btn" data-res-tab="table">Visual Table</button>
+                        <button class="res-tab-btn" data-res-tab="report">HTML Report</button>
+                        <button class="res-tab-btn" data-res-tab="md">MD Report</button>
+                    </div>
+                    
+                    <div id="json-res-content" class="res-tab-content">
+                        <div class="code-header">
+                            <span>RAW JSON</span>
+                            <button id="copyJsonBtn"><i class="fas fa-copy"></i> Copy</button>
+                        </div>
+                        <pre id="outputJson"></pre>
+                    </div>
+                    
+                    <div id="table-res-content" class="res-tab-content hidden">
+                        <div id="htmlTable" class="table-responsive"></div>
+                    </div>
+                    
+                    <div id="report-res-content" class="res-tab-content hidden">
+                        <div id="htmlReport" class="report-content-box"></div>
+                    </div>
 
-                <div id="standardResults">
-                    <pre id="standardOutput"></pre>
+                    <div id="md-res-content" class="res-tab-content hidden">
+                        <div id="mdReport" class="report-content-box markdown-body"></div>
+                    </div>
                 </div>
             </section>
 
             <div id="loader" class="loader hidden">
-                <div class="spinner"></div>
-                <p id="loaderText">Clawing data... please wait.</p>
+                <div class="cyber-spinner">
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <div class="spinner-ring"></div>
+                    <span></span>
+                </div>
+                <p id="loaderText">Initializing Neural Claw...</p>
             </div>
 
-            <div id="errorMessage" class="error-message hidden"></div>
+            <div id="errorMessage" class="error-message hidden">
+                <i class="fas fa-circle-exclamation"></i>
+                <span id="errorText"></span>
+            </div>
         </main>
     </div>
 
-        <script src="assets/js/app.js?v=<?php echo time(); ?>"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 </html>
