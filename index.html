@@ -25,30 +25,88 @@
                 </div>
             </section>
 
-            <section class="claw-section">
-                <div class="input-group">
-                    <label for="targetUrl">Target URL</label>
-                    <input type="url" id="targetUrl" placeholder="https://example.com" required>
-                </div>
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="standard">Standard Claw</button>
+                <button class="tab-btn" data-tab="comparison">CRO Comparison</button>
+                <button class="tab-btn" data-tab="enhanced">Enhanced Extractor</button>
+            </div>
 
-                <div class="input-group">
-                    <label for="prompt">Parsing Prompt</label>
-                    <textarea id="prompt" rows="4" placeholder="Extract all product names and their prices in a list."></textarea>
-                </div>
+            <div id="standard" class="tab-content">
+                <section class="claw-section">
+                    <div class="input-group">
+                        <label for="targetUrl">Target URL</label>
+                        <input type="url" id="targetUrl" placeholder="https://example.com">
+                    </div>
 
-                <button id="clawBtn">Run Claw</button>
-            </section>
+                    <div class="input-group">
+                        <label for="prompt">Parsing Prompt</label>
+                        <textarea id="prompt" rows="4" placeholder="Extract all product names and their prices in a list."></textarea>
+                    </div>
+
+                    <button class="run-btn" id="clawBtn">Run Claw</button>
+                </section>
+            </div>
+
+            <div id="comparison" class="tab-content hidden">
+                <section class="claw-section">
+                    <div class="input-group">
+                        <label>Target URLs (2-3 links)</label>
+                        <input type="url" class="compare-url" placeholder="https://example.com/page1" style="margin-bottom: 0.5rem;">
+                        <input type="url" class="compare-url" placeholder="https://example.com/page2" style="margin-bottom: 0.5rem;">
+                        <input type="url" class="compare-url" placeholder="https://example.com/page3 (Optional)">
+                    </div>
+                    <button class="run-btn" id="compareBtn">Compare Links</button>
+                </section>
+            </div>
+
+            <div id="enhanced" class="tab-content hidden">
+                <section class="claw-section">
+                    <div class="input-group">
+                        <label for="enhancedUrl">Target URL</label>
+                        <input type="url" id="enhancedUrl" placeholder="https://example.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="enhancedPrompt">Specific Instructions (Optional)</label>
+                        <textarea id="enhancedPrompt" rows="3" placeholder="Focus on hero section, pricing, and CTA buttons."></textarea>
+                    </div>
+                    <button class="run-btn" id="enhancedBtn">Extract Enhanced Data</button>
+                </section>
+            </div>
 
             <section class="result-section hidden" id="resultSection">
-                <h2>Result</h2>
+                <div class="result-header">
+                    <h2>Result</h2>
+                    <button id="copyBtn">Copy JSON</button>
+                </div>
                 <div class="usage-info" id="usageInfo"></div>
-                <pre id="output"></pre>
-                <button id="copyBtn">Copy JSON</button>
+                
+                <div id="enhancedResults" class="hidden">
+                    <div class="result-tab-container">
+                        <div class="result-tabs">
+                            <button class="result-tab-btn active" data-result-tab="json">JSON Data</button>
+                            <button class="result-tab-btn" data-result-tab="table">Visual Table</button>
+                            <button class="result-tab-btn" data-result-tab="report">Text Report</button>
+                        </div>
+                        <div id="json-result" class="result-tab-content">
+                            <pre id="output"></pre>
+                        </div>
+                        <div id="table-result" class="result-tab-content hidden">
+                            <div id="htmlTable" class="table-responsive"></div>
+                        </div>
+                        <div id="report-result" class="result-tab-content hidden">
+                            <div id="textReport" class="report-content"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="standardResults">
+                    <pre id="standardOutput"></pre>
+                </div>
             </section>
 
             <div id="loader" class="loader hidden">
                 <div class="spinner"></div>
-                <p>Clawing data... please wait.</p>
+                <p id="loaderText">Clawing data... please wait.</p>
             </div>
 
             <div id="errorMessage" class="error-message hidden"></div>
