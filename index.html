@@ -50,6 +50,9 @@
                 <button class="tab-btn" data-tab="local">
                     <i class="fas fa-file-import"></i> Local Analysis
                 </button>
+                <button class="tab-btn" data-tab="leadgen">
+                    <i class="fas fa-bullseye"></i> Lead Generation
+                </button>
             </nav>
 
             <div id="standard" class="tab-content glass-panel">
@@ -117,6 +120,22 @@
                     </div>
                     <button class="run-btn" id="localBtn">
                         <i class="fas fa-microchip"></i> Analyze Local File
+                    </button>
+                </section>
+            </div>
+
+            <div id="leadgen" class="tab-content hidden glass-panel">
+                <section class="claw-section">
+                    <div class="input-group">
+                        <label for="leadgenUrl"><i class="fas fa-link"></i> Prospect URL</label>
+                        <input type="url" id="leadgenUrl" placeholder="https://prospect-website.com">
+                    </div>
+                    <div class="input-group">
+                        <label for="leadgenService"><i class="fas fa-briefcase"></i> Your Service/Offering</label>
+                        <input type="text" id="leadgenService" placeholder="e.g. SEO Services, Web Development, SaaS Tool">
+                    </div>
+                    <button class="run-btn" id="leadgenBtn">
+                        <i class="fas fa-magnifying-glass-dollar"></i> Generate Sales Pitch
                     </button>
                 </section>
             </div>

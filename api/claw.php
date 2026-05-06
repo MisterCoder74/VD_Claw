@@ -128,6 +128,18 @@ if ($mode === 'cro') {
     $systemPrompt = "You are a Data Analysis Expert. Analyze the provided local file content based on the user's instructions. $jsonInstruction";
     $userPrompt = "File Name: $fileName\nInstructions: $instructions\n\nFile Content:\n$processedContent";
 
+} elseif ($mode === 'leadgen') {
+    $url = $input['url'] ?? null;
+    $service = $input['service'] ?? 'General Consulting';
+    if (!$url) sendError('Prospect URL is required');
+    
+    $raw = scrape($url, $config['scraper']['user_agent'], $config['scraper']['timeout']);
+    if (!$raw) sendError('Failed to fetch the prospect URL');
+    
+    $cleaned = cleanHtml($raw);
+    $systemPrompt = "You are a World-Class Sales Strategist and Business Analyst. Your task is to analyze a prospect's website and generate a high-converting sales pitch based on a specific offering. $jsonInstruction";
+    $userPrompt = "Prospect URL: $url\nMy Offering: $service\n\nWebsite Content:\n$cleaned\n\nPlease identify:\n1. Business Niche & Target Audience\n2. Potential Pain Points (based on the website content)\n3. Contact Information (if visible)\n4. A Sales Audit (brief evaluation of their current situation)\n5. A personalized Sales Pitch/Email for my offering.";
+
 } else {
     // Standard Mode
     $url = $input['url'] ?? null;
