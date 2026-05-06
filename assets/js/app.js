@@ -137,6 +137,13 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.readAsText(file);
     });
 
+    document.getElementById('leadgenBtn').addEventListener('click', () => {
+        const url = document.getElementById('leadgenUrl').value.trim();
+        const service = document.getElementById('leadgenService').value.trim();
+        if (!url) return showError('Prospect URL is required.');
+        runClaw('leadgen', { url, service });
+    });
+
     function displayResult(result) {
         currentResultData = result.data;
         resultSection.classList.remove('hidden');
@@ -210,7 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'standard': 'Initiating Neural Scan...',
             'cro': 'Comparing Multiple Entities...',
             'enhanced': 'Deep Extraction in Progress...',
-            'local': 'Analyzing Local Neural Pattern...'
+            'local': 'Analyzing Local Neural Pattern...',
+            'leadgen': 'Analyzing Prospect & Crafting Pitch...'
         };
         loaderText.textContent = texts[mode] || 'Processing...';
         document.querySelectorAll('.run-btn').forEach(btn => btn.disabled = true);
